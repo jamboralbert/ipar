@@ -1,0 +1,29 @@
+#include <SoftwareSerial.h>
+SoftwareSerial BTserial(10, 11);
+#include <dht.h>
+
+
+#define pin A0
+float temp;
+float humidity;
+
+dht DHT;
+
+
+void setup() {
+  BTserial.begin(9600);
+}
+
+void loop() {
+  DHT.read11(pin);
+
+  temp = DHT.temperature;
+  humidity = DHT.humidity;
+
+  BTserial.print(temp);
+  BTserial.print(" C");
+  BTserial.print(",");
+  BTserial.print(humidity);
+  BTserial.print(" g/m3");
+  BTserial.print(";");
+}
